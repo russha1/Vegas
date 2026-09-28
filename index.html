@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sana Bir Sorum Var ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #12000b, #3b071d, #16000d);
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+h1 {
+    font-size: 42px;
+    margin-bottom: 25px;
+    color: #ff8fba;
+    text-shadow: 0 0 20px #ff2f75;
+}
+
+.poem {
+    max-width: 650px;
+    font-size: 21px;
+    line-height: 1.9;
+    color: #ffe8f0;
+}
+
+.scroll {
+    margin-top: 60px;
+    font-size: 18px;
+    color: #ff9ec1;
+    animation: bounce 1.5s infinite;
+}
+
+.arrow {
+    font-size: 35px;
+    margin-top: 10px;
+}
+
+@keyframes bounce {
+    50% {
+        transform: translateY(12px);
+    }
+}
+
+.question {
+    font-size: 38px;
+    color: #ff9fc2;
+    text-shadow: 0 0 15px #ff2670;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+button {
+    border: none;
+    padding: 16px 35px;
+    border-radius: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#yes {
+    background: #ff3f7f;
+    color: white;
+    box-shadow: 0 0 20px #ff3f7f;
+}
+
+#no {
+    background: #555;
+    color: white;
+}
+
+button:hover {
+    transform: scale(1.08);
+}
+
+#result {
+    display: none;
+    margin-top: 30px;
+    font-size: 28px;
+    color: #ff9fc2;
+    animation: appear 1s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.heart {
+    position: fixed;
+    top: -50px;
+    font-size: 30px;
+    animation: fall linear forwards;
+    pointer-events: none;
+    z-index: 999;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.small {
+    color: #ffb5cd;
+    margin-top: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ŞİİR -->
+<section>
+    <h1>Sana Bir Şey Söylemek İstiyorum ❤️</h1>
+
+    <div class="poem">
+        Gözlerin değince dünyam güzelleşiyor,<br>
+        Sen gülünce içimde çiçekler açıyor.<br>
+        Her gün seni biraz daha tanırken,<br>
+        Kalbim sana biraz daha yaklaşıyor.<br><br>
+
+        Belki kelimeler yetmez anlatmaya,<br>
+        Belki cümleler eksik kalır sana.<br>
+        Ama tek bir şeyden eminim:<br>
+        Seni hayatımda görmek çok güzel bir duygu. ❤️<br><br>
+
+        Şimdi senden küçük bir cevap istiyorum...
+    </div>
+
+    <div class="scroll">
+        Aşağı kaydır ❤️
+        <div class="arrow">↓</div>
+    </div>
+</section>
+
+
+<!-- TEKLİF -->
+<section id="offer">
+
+    <div class="question">
+        Benimle çıkar mısın? ❤️
+    </div>
+
+    <div class="small">
+        Vereceğin cevap benim için çok değerli...
+    </div>
+
+    <div class="buttons">
+        <button id="yes" onclick="yesClicked()">Evet ❤️</button>
+        <button id="no" onclick="noClicked()">Hayır</button>
+    </div>
+
+    <div id="result">
+        YAAAAAAY! ❤️🥹<br><br>
+        Artık hikâyemiz resmen başladı. 💕
+    </div>
+
+</section>
+
+
+<script>
+
+let noSize = 20;
+
+function noClicked() {
+    const noButton = document.getElementById("no");
+    const yesButton = document.getElementById("yes");
+
+    noSize += 8;
+
+    yesButton.style.transform = "scale(" + (1 + noSize / 100) + ")";
+    noButton.innerHTML = "Evet ❤️";
+}
+
+function yesClicked() {
+
+    document.getElementById("result").style.display = "block";
+
+    document.querySelector(".question").innerHTML =
+        "SENİ ÇOK SEVİYORUM ❤️🥹";
+
+    document.querySelector(".buttons").style.display = "none";
+
+    // Kalpler oluştur
+    for (let i = 0; i < 100; i++) {
+
+        setTimeout(() => {
+
+            const heart = document.createElement("div");
+
+            heart.className = "heart";
+            heart.innerHTML =
+                ["❤️","💖","💕","💗","💓","💘"][Math.floor(Math.random() * 6)];
+
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration =
+                (2 + Math.random() * 4) + "s";
+
+            heart.style.fontSize =
+                (20 + Math.random() * 35) + "px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+
+        }, i * 50);
+    }
+}
+
+</script>
+
+</body>
+</html>
