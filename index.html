@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sana Bir Sorum Var... ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #feada6 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .heart-icon {
+            font-size: 50px;
+            animation: pulse 1.5s infinite;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            min-height: 60px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s ease, font-size 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .btn-yes {
+            background-color: #ff4757;
+            color: white;
+            z-index: 2;
+        }
+
+        .btn-no {
+            background-color: #ced6e0;
+            color: #2f3542;
+            z-index: 1;
+            transition: all 0.2s ease;
+        }
+
+        .result-container {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .poem {
+            font-style: italic;
+            background: #fff0f3;
+            padding: 15px;
+            border-left: 4px solid #ff4757;
+            border-radius: 8px;
+            margin: 15px 0;
+            color: #444;
+            text-align: center;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .bg-heart {
+            position: fixed;
+            color: rgba(255, 71, 87, 0.3);
+            font-size: 20px;
+            animation: float 6s linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="hearts-container"></div>
+
+    <div class="card">
+        <div id="question-container">
+            <div class="heart-icon">💖</div>
+            <h1>Aklımda ve Kalbimde Sadece Sen Varsın...</h1>
+            <p>Hayatıma kattığın her anı daha anlamlı kılmak, her güne seninle uyanıp gülüşünle aydınlanmak istiyorum.</p>
+            <p style="font-weight: bold; color: #d63384; font-size: 16px;">Benimle bu güzel yolda beraber yürümeye var mısın?</p>
+            
+            <div class="buttons">
+                <button class="btn btn-yes" onclick="acceptOffer()">Evet! ❤️</button>
+                <button class="btn btn-no" id="noBtn" onclick="moveNoButton()">Hayır 🙈</button>
+            </div>
+        </div>
+
+        <div class="result-container" id="result-container">
+            <div class="heart-icon">👩‍❤️‍👨</div>
+            <h1>İyi ki Sen! ❤️</h1>
+            <p>Dünyanın en mutlu insanı yaptın beni...</p>
+
+            <div class="poem">
+                Gözlerinin içinde buldum huzuru,<br>
+                Seninle başladı gönlümün baharı.<br>
+                Birlikte yazalım en güzel masalı,<br>
+                El ele, kalp kalbe, bir ömür boyu...
+            </div>
+
+            <p style="font-size: 14px; color: #777;">Seni çok seviyorum! ✨</p>
+        </div>
+    </div>
+
+    <script>
+        let clickCount = 0;
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.querySelector('.btn-yes');
+
+        function moveNoButton() {
+            clickCount++;
+            
+            let currentYesSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = (currentYesSize + 3) + 'px';
+
+            const messages = [
+                "Emin misin? 🥺",
+                "Bir daha düşün! 🌹",
+                "Yanlış buton galiba! 😅",
+                "Kaçamazsın ki! 😉",
+                "Evet büyüyor bak! ✨",
+                "Son kararın mı? 💔"
+            ];
+            
+            if (clickCount < messages.length) {
+                noBtn.innerText = messages[clickCount];
+            }
+
+            const x = (Math.random() - 0.5) * 150;
+            const y = (Math.random() - 0.5) * 150;
+            
+            noBtn.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function acceptOffer() {
+            document.getElementById('question-container').style.display = 'none';
+            const resultContainer = document.getElementById('result-container');
+            resultContainer.style.display = 'block';
+            setTimeout(() => {
+                resultContainer.style.opacity = '1';
+            }, 50);
+
+            for(let i = 0; i < 25; i++) {
+                createHeart();
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('bg-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            document.getElementById('hearts-container').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        setInterval(createHeart, 600);
+    </script>
+</body>
+</html>
